@@ -1,0 +1,38 @@
+graph TD
+    Start([Start]) --> Read[Read Infix Expression]
+    Read --> Choice{Choose Conversion}
+    
+    Choice --> Postfix[Infix to Postfix]
+    Choice --> Prefix[Infix to Prefix]
+    
+    subgraph "Postfix Conversion"
+        Post_1[Scan characters from left to right]
+        Post_1 --> Post_2{Operand?}
+        Post_2 -- Yes --> Post_3[Add to Output]
+        Post_2 -- No --> Post_4{Left Bracket?}
+        Post_4 -- Yes --> Post_5[Push to Stack]
+        Post_4 -- No --> Post_6{Right Bracket?}
+        Post_6 -- Yes --> Post_7[Pop Stack to Output until Left Bracket]
+        Post_6 -- No --> Post_8{Operator?}
+        Post_8 -- Yes --> Post_9[Pop Stack to Output until Lower Precedence]
+        Post_9 --> Post_10[Push Current Operator to Stack]
+        Post_3 --> Post_11{End of Expression?}
+        Post_5 --> Post_11
+        Post_7 --> Post_11
+        Post_10 --> Post_11
+        Post_11 -- No --> Post_1
+        Post_11 -- Yes --> Post_12[Pop Remaining Operators to Output]
+    end
+    
+    subgraph "Prefix Conversion"
+        Pre_1[Reverse Infix Expression]
+        Pre_1 --> Pre_2[Swap Parentheses]
+        Pre_2 --> Pre_3[Apply Postfix Algorithm]
+        Pre_3 --> Pre_4[Reverse the Result]
+    end
+    
+    Postfix --> Post_1
+    Prefix --> Pre_1
+    
+    Post_12 --> End([End])
+    Pre_4 --> End
