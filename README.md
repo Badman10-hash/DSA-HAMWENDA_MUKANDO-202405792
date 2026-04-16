@@ -76,12 +76,7 @@ The following flowchart illustrates the overall workflow for converting infix ex
 ## Project Structure
 ```
 expression-converter/
-├── src/
-│   └── main/
-│       └── java/
-│           └── com/
-│               └── converter/
-│                   └── ExpressionConverter.java
+├──ExpressionConverter.java
 ├── docs/
 │   ├── PseudoCode.md
 │   └── flowchart.mmd
